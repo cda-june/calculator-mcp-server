@@ -1,20 +1,17 @@
-from mcp.server.fastmcp import FastMCP
 import argparse
 import math
-import numpy as np
-from scipy import stats
-from sympy import symbols, solve, sympify, diff, integrate, oo, Sum
 from typing import List, Tuple
+
+from mcp.server.fastmcp import FastMCP
+import numpy as np
 import matplotlib.pyplot as plt
 import sympy as sp
-import numpy as np
-import matplotlib.pyplot as plt
-from sympy import integrate as sympy_integrate
+from scipy import stats
+from sympy import symbols, solve, sympify, diff, oo, Sum
 
 # Create MCP Server
 app = FastMCP(
     name="Mathematical Calculator",
-    instructions="A server for complex mathematical calculations",
     dependencies=["numpy", "scipy", "sympy", "matplotlib"],
 )
 
@@ -243,7 +240,7 @@ def integrate(expression: str, variable: str = "x") -> dict:
     try:
         var = symbols(variable)
         expr = sympify(expression)
-        result = sympy_integrate(expr, var)  # Use sympy_integrate instead of integrate
+        result = sp.integrate(expr, var)
         return {"result": str(result)}
     except Exception as e:
         return {"error": str(e)}
